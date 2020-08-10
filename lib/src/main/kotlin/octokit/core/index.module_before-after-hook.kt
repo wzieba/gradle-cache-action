@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-@file:Suppress("INTERFACE_WITH_SUPERCLASS", "OVERRIDING_FINAL_MEMBER", "RETURN_TYPE_MISMATCH_ON_OVERRIDE", "CONFLICTING_OVERLOADS")
+@file:Suppress("INTERFACE_WITH_SUPERCLASS", "OVERRIDING_FINAL_MEMBER", "RETURN_TYPE_MISMATCH_ON_OVERRIDE")
 
 package octokit.core
 
@@ -53,7 +53,8 @@ external interface HookCollection {
     fun after(name: String, afterHook: AfterHook<Any, Any>)
     fun wrap(name: String, wrapHook: WrapHook<Any, Any>)
     fun remove(name: String, hook: BeforeHook<Any>)
-    fun remove(name: String, hook: ErrorHook<Any, Any>)
+    // This causes CONFLICTING_OVERLOADS
+    // fun remove(name: String, hook: ErrorHook<Any, Any>)
     fun remove(name: String, hook: AfterHook<Any, Any>)
     fun remove(name: String, hook: WrapHook<Any, Any>)
 }
