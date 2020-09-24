@@ -31,4 +31,4 @@ val ActionsTrigger.cacheKey: String
         is ActionsTrigger.Schedule, is ActionsTrigger.WorkflowDispatch ->
             GradleCacheAction.DEFAULT_BRANCH_VAR
         is ActionsTrigger.Other -> "$name-${ActionsEnvironment.GITHUB_WORKFLOW}-${ActionsEnvironment.GITHUB_SHA}"
-    }
+    }.replace("/", "_")
