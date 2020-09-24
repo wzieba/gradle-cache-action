@@ -39,7 +39,7 @@ class CacheServerTest {
         writeFile(file, contents)
         val patterns = listOf("$dir/**")
 
-        val primaryKey = "linux-gradle-123123"
+        val primaryKey = "linux-gradle-feature/123123"
 
         cacheService {
             saveAndLog(patterns, primaryKey, "1-")
