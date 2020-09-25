@@ -17,7 +17,9 @@
 package com.github.burrunan.launcher
 
 import actions.core.ActionFailedException
+import actions.core.debug
 import actions.core.info
+import actions.core.isDebug
 import actions.core.warning
 import actions.httpclient.HttpClient
 import actions.httpclient.HttpCodes
@@ -124,11 +126,13 @@ suspend fun findVersionFromWrapper(projectPath: String): GradleDistribution {
         .removeSuffix(".zip")
 
     if (distributionSha256Sum == null) {
-        warning(
-            "distributionSha256Sum is not set in $gradleWrapperProperties.\n" +
-                "Please consider adding the checksum, " +
-                "see https://docs.gradle.org/current/userguide/gradle_wrapper.html#configuring_checksum_verification",
-        )
+        if (isDebug()) {
+            warning(
+                "distributionSha256Sum is not set in $gradleWrapperProperties.\n" +
+                    "Please consider adding the checksum, " +
+                    "see https://docs.gradle.org/current/userguide/gradle_wrapper.html#configuring_checksum_verification",
+            )
+        }
     }
 
     return if (distributionUrl.removePrefix("https").removePrefix("http")
